@@ -11,3 +11,8 @@ npm version major更新一个大改动。
 4. npm publish
 
 > publish 的过程中可能报错，原因可能是邮箱没有认证或者npm源被修改了，需要改回官方源再publish
+
+```
+// 设置官方源
+npm config set registry https://registry.npmjs.org/
+```
