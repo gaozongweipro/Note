@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+  <style type="text/css">
+    .backPicture{
+      height: 100%;
+      width: 100%;
+    }
+    .backImg {
+      height: auto;
+      width: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .name {
+      color: #d3e8f6;
+      background-color: #3a92fc;
+      font-family: sans-serif;
+      position: absolute;
+      top: 70px;
+      font-size: 18px;
+      left: 24px;
+      width: 60px;
+      height: 30px;
+      text-align: justify;
+    }
+    .sex {
+      color: #d3e8f6;
+      background-color: #3a92fc;
+      font-family: sans-serif;
+      position: absolute;
+      top: 106px;
+      font-size: 16px;
+      left: 80px;
+      width: 30px;
+      height: 30px;
+      padding-left: 5px;
+      text-align: justify;
+    }
+    #newName {
+      display: none;
+      width: 100px;
+    }
+    #wrapper {
+      position: absolute;
+      font-family: pingFang;
+      color: #38403e;
+      top: 373px;
+      font-size: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-left: 10px;
+      text-align: justify;
+      background-color: white;
+      white-space: nowrap;
+    }
+    #borderAnimate {
+      width: 184px;
+    height: 184px;
+    position: absolute;
+    overflow: hidden;
+    left: 51%;
+    top: 495px;
+    border-radius: 3px;
+    transform: translate(-50%, -50%) scale(0.9);
+    
+    }
+    #timeLimit {
+    position: absolute;
+    top: 620px;
+    background-color: #ffffff;
+    left: 50%;
+    transform: scale(0.8) translateX(-65%);
+    padding: 10px 15px;
+    white-space: nowrap;
+    }
+    #idNumHide {
+      /* display: none; */
+    }
+    #idNumShow {
+      display: none;
+    }
+    #idNumHide {
+      position: absolute;
+      top: 137px;
+      left: 80px;
+      color: #FFFFFF;
+      background-color: #3a92fc;
+      padding: 5px 8px;
+
+    }
+    /* #borderAnimate::after {
+      content: '';
+      position: absolute;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      background-repeat: no-repeat;
+      background-size: 50% 50%, 50% 50%;
+      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+      background-image: linear-gradient(#3a92fc, #3a92fc), linear-gradient(#ffffff, #ffffff), linear-gradient(#3a92fc, #3a92fc), linear-gradient(#ffffff, #ffffff);
+      animation: div3Rotate 4s linear infinite;
+    } */
+    #content {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 184px;
+      height: 184px;
+      /* width: calc(100% - 10px);
+      height: calc(100% - 10px); */
+      background: url('https://github.com/gaozongweipro/Note/blob/main/output-onlineimagetools.gif?raw=true');
+      z-index: 2;
+      /* padding: 20px; */
+      box-sizing: border-box;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      /* transform: scale(0.5); */
+    }
+    @keyframes div3Rotate {
+    100% {
+        transform: rotate(360deg);
+      }  
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="backPicture">
+    <div class="name" contenteditable id="fixName" >郑立娜</div>
+    <div class="sex" contenteditable id="fixSex">女</div>
+    <div id="wrapper"></div>
+    <div id="borderAnimate">
+      <div id="content">
+        
+      </div>
+    </div>
+    <img class="backImg" src="https://raw.githubusercontent.com/gaozongweipro/Note/main/download.png" alt="">
+  </div>
+  <div id="idNumHide" contenteditable>230************06X</div>
+  <!-- <div id="idNumShow">23062219960828406X</div> -->
+  <div id="timeLimit"></div>
+</body>
+<script>
+  var _wrapper = document.querySelector("#wrapper");
+  // $('#fixName').on('touchstart', function() {
+  //   $(this).attr('contenteditable', true);
+  // })
+  // $('#fixName').on('blur', function() {
+  //   $(this).attr('contenteditable', false);
+  // })
+  // $('#fixSex').on('touchstart', function() {
+  //   $(this).attr('contenteditable', true);
+  // })
+  // $('#fixSex').on('blur', function() {
+  //   $(this).attr('contenteditable', false);
+  // })
+  // $('#idNumHide').on('touchstart', function() {
+  //   $(this).attr('contenteditable', true);
+  // })
+  // $('#idNumHide').on('blur', function() {
+  //   $(this).attr('contenteditable', false);
+  // })
+
+  function getTImeText(distance) {
+    var cha = new Date();
+    var cha2 = new Date();
+   if (distance) {
+    cha.setDate(cha.getDate() + distance);
+   }
+  //  console.log(cha.toISOString()); //119373955毫秒
+   var year = cha.getFullYear();
+   var month = cha.getMonth() + 1;
+   var date = cha.getDate();
+   var hours = cha.getHours();
+   var minutes = cha.getMinutes();
+   var seconds = cha.getSeconds();
+   return `${year}-${month > 9 ? month : '0' + month}-${date > 9 ? date : '0' + date}`
+  }
+  console.log(getTImeText(7));
+  var start = getTImeText(-1);
+  var end = getTImeText(6);
+  document.getElementById('timeLimit').innerHTML = '有效期：' + start + ' ~ ' + end;
+
+
+ function test() {
+   // 两个日期相减
+   var cha = new Date();
+   console.log(cha); //119373955毫秒
+   var year = cha.getFullYear();
+   var month = cha.getMonth() + 1;
+   var date = cha.getDate();
+   var hours = cha.getHours();
+   var minutes = cha.getMinutes();
+   var seconds = cha.getSeconds();
+   var space = '        '
+   _wrapper.innerHTML = `${year}-${month > 9 ? month : '0' + month}-${date}     ${space}   ${hours}:${minutes > 9 ? minutes : '0' + minutes}:${seconds > 9 ? seconds : '0' + seconds}`
+ }
+ setInterval("test()", 1000);
+
+
+ // 拖动
+
+ function moveIt(idName) {
+  var div = document.querySelector('#' + idName);
+    //获取手指初始坐标
+    var startX = 0;
+    var startY = 0;
+    //获取盒子原来的位置
+    var x = 0;
+    var y = 0;
+    div.addEventListener('touchstart', function (e) {
+ //计算手指的移动距离，手指移动之后的坐标减去手指原来的坐标
+        startX = e.targetTouches[0].pageX;
+        startY = e.targetTouches[0].pageY;
+        // div.setAttribute('contenteditable', true);
+        div.focus();
+        let range = document.createRange();
+        range.selectNodeContents(div);
+        range.collapse(false);
+        let sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        //盒子原来的位置加手指移动的距离
+        x = this.offsetLeft;
+        y = this.offsetTop; 
+          //阻止默认的屏幕滚动
+        
+        e.preventDefault();
+       
+    });
+
+    div.addEventListener('touchmove', function (e) {
+
+        //计算手指的移动距离，手指移动之后的坐标减去手指原来的坐标
+        var moveX = e.targetTouches[0].pageX - startX;
+        var moveY = e.targetTouches[0].pageY - startY;
+        //盒子原来的位置加手指移动的距离
+        this.style.left = x + moveX + 'px';
+        this.style.top = y + moveY + 'px';
+        //阻止默认的屏幕滚动
+        e.preventDefault();
+    })
+ }
+ 
+ moveIt('fixName')
+ moveIt('fixSex')
+ moveIt('idNumHide')
+ moveIt('timeLimit')
+
+ var _active = document.querySelector("#active");
+ var count = _active.innerText;
+ var id = setInterval(function() {
+   count--;
+   //重新写入
+   _active.innerText = count;
+   if (count == 0) {
+     clearInterval(id);
+   }
+ }, 1000)
+</script>
+</html>
